@@ -1,84 +1,32 @@
 import React from "react";
 import {
-  ArrowDown,
+  ArrowRight,
   BookOpen,
   CheckCircle2,
-  ClipboardCheck,
   Code2,
   CreditCard,
-  Database,
-  Download,
   GitBranch,
-  LockKeyhole,
-  Mail,
-  ServerCog,
+  ShieldCheck,
   Sparkles,
 } from "lucide-react";
 
-const checkoutUrl = import.meta.env.VITE_CHECKOUT_URL || "";
+const amazonUrl = "https://www.amazon.com/dp/B0H6T77MPR";
+const checkoutUrl = import.meta.env.VITE_CHECKOUT_URL || amazonUrl;
 
-const stats = [
-  { value: "56", label: "chapters" },
-  { value: "11", label: "parts" },
-  { value: "12", label: "appendices" },
+const highlights = [
+  "Architecture, APIs, data, testing, delivery, operations, security, and AI in one practical guide.",
+  "Includes case studies, checklists, ADR templates, production readiness reviews, and runbooks.",
+  "Written for engineers and technical leaders building production software.",
 ];
 
 const topics = [
-  {
-    icon: Code2,
-    title: "Foundations and design",
-    text: "Mindset, requirements, lifecycle thinking, refactoring, software design, patterns, and domain modeling.",
-  },
-  {
-    icon: ServerCog,
-    title: "Architecture and systems",
-    text: "System boundaries, APIs, messaging, distributed failure modes, workflow orchestration, and reliability.",
-  },
-  {
-    icon: Database,
-    title: "Data and performance",
-    text: "Persistence, relational modeling, migrations, caching, search, capacity planning, and practical bottleneck analysis.",
-  },
-  {
-    icon: GitBranch,
-    title: "Delivery and collaboration",
-    text: "Testing strategy, code review, CI/CD, cloud platforms, production readiness, and observability.",
-  },
-  {
-    icon: LockKeyhole,
-    title: "Security and privacy",
-    text: "Secure SDLC, threat modeling, secrets, compliance, accessibility, multi-tenant isolation, and operational controls.",
-  },
-  {
-    icon: Sparkles,
-    title: "AI-assisted engineering",
-    text: "Responsible AI adoption, RAG systems, evaluation workflows, prompt risks, and team-level quality controls.",
-  },
-];
-
-const audience = [
-  "Software engineers building production systems",
-  "Technical leads aligning teams around quality",
-  "Engineering managers standardizing delivery habits",
-  "Teams modernizing legacy systems without rewrite risk",
-];
-
-const playbooks = [
-  "Practical engineering checklists",
-  "Secure SDLC and AI checklist",
-  "Architecture decision record templates",
-  "Production readiness review template",
-  "API contract and compatibility examples",
-  "Distributed systems and messaging examples",
-  "Database migration and data reliability playbook",
-  "Observability and incident runbook examples",
+  { icon: Code2, label: "Clean code and design" },
+  { icon: GitBranch, label: "Delivery and collaboration" },
+  { icon: ShieldCheck, label: "Security and reliability" },
+  { icon: Sparkles, label: "AI-assisted engineering" },
 ];
 
 function App() {
-  const primaryCta = checkoutUrl || "mailto:hello@example.com?subject=Modern%20Software%20Engineering%20ebook";
-  const primaryLabel = checkoutUrl ? "Buy the ebook" : "Request access";
-  const PrimaryIcon = checkoutUrl ? CreditCard : Mail;
-
   return (
     <>
       <header className="site-header" aria-label="Primary navigation">
@@ -86,11 +34,9 @@ function App() {
           <span className="brand-mark">MSE</span>
           <span>Modern Software Engineering</span>
         </a>
-        <nav className="nav-links" aria-label="Page sections">
-          <a href="#inside">Inside</a>
-          <a href="#audience">Audience</a>
-          <a href="#pricing">Get it</a>
-        </nav>
+        <a className="nav-cta" href={checkoutUrl} target="_blank" rel="noreferrer">
+          Buy on Amazon
+        </a>
       </header>
 
       <main id="top">
@@ -99,30 +45,36 @@ function App() {
             <p className="eyebrow">First edition ebook</p>
             <h1 id="hero-title">Modern Software Engineering</h1>
             <p className="hero-lede">
-              A practical field guide for building software with stronger design, clearer delivery habits,
-              better production discipline, and modern AI-aware engineering judgment.
+              A practical guide for engineers who want to design better systems, ship with confidence,
+              and operate software with modern production discipline.
             </p>
+
             <div className="hero-actions" aria-label="Primary actions">
-              <a className="button button-primary" href={primaryCta}>
-                <PrimaryIcon size={19} aria-hidden="true" />
-                {primaryLabel}
+              <a className="button button-primary" href={checkoutUrl} target="_blank" rel="noreferrer">
+                <CreditCard size={20} aria-hidden="true" />
+                Buy the ebook on Amazon
+                <ArrowRight size={18} aria-hidden="true" />
               </a>
               <a className="button button-secondary" href="#inside">
-                <ArrowDown size={19} aria-hidden="true" />
-                View contents
+                <BookOpen size={20} aria-hidden="true" />
+                See what's inside
               </a>
             </div>
-            <dl className="stats" aria-label="Book highlights">
-              {stats.map((stat) => (
-                <div key={stat.label}>
-                  <dt>{stat.value}</dt>
-                  <dd>{stat.label}</dd>
-                </div>
-              ))}
-            </dl>
+
+            <div className="quick-stats" aria-label="Book highlights">
+              <span>56 chapters</span>
+              <span>11 parts</span>
+              <span>12 appendices</span>
+            </div>
           </div>
 
-          <div className="cover-stage" aria-label="Modern Software Engineering ebook cover">
+          <div className="cover-panel" aria-label="Modern Software Engineering ebook cover">
+            <div className="code-card" aria-hidden="true">
+              <span>deploy --safe</span>
+              <span>test.status = green</span>
+              <span>observe(latency)</span>
+              <span>review architecture</span>
+            </div>
             <img
               src="/Modern_Software_Engineering_First_Edition_Cover.png"
               alt="Cover of the Modern Software Engineering ebook"
@@ -132,33 +84,19 @@ function App() {
           </div>
         </section>
 
-        <section className="intro-band" aria-labelledby="intro-title">
-          <div className="section-inner intro-grid">
-            <div>
-              <p className="eyebrow">What it helps with</p>
-              <h2 id="intro-title">Turn engineering knowledge into repeatable practice.</h2>
-            </div>
-            <p>
-              The ebook connects foundations, architecture, testing, operations, security, AI assistance,
-              modernization, and engineering leadership into one practical reference for daily software work.
-            </p>
-          </div>
-        </section>
-
-        <section className="section" id="inside" aria-labelledby="inside-title">
+        <section className="inside-strip" id="inside" aria-labelledby="inside-title">
           <div className="section-inner">
             <div className="section-heading">
               <p className="eyebrow">Inside the book</p>
-              <h2 id="inside-title">A full-stack view of modern engineering.</h2>
+              <h2 id="inside-title">A focused software engineering playbook.</h2>
             </div>
-            <div className="topic-grid">
+            <div className="topic-row">
               {topics.map((topic) => {
                 const Icon = topic.icon;
                 return (
-                  <article className="topic-card" key={topic.title}>
-                    <Icon size={25} aria-hidden="true" />
-                    <h3>{topic.title}</h3>
-                    <p>{topic.text}</p>
+                  <article className="topic-pill" key={topic.label}>
+                    <Icon size={23} aria-hidden="true" />
+                    <span>{topic.label}</span>
                   </article>
                 );
               })}
@@ -166,67 +104,23 @@ function App() {
           </div>
         </section>
 
-        <section className="section audience-band" id="audience" aria-labelledby="audience-title">
-          <div className="section-inner audience-layout">
-            <div className="section-heading">
-              <p className="eyebrow">Who it is for</p>
-              <h2 id="audience-title">Built for engineers who own outcomes.</h2>
+        <section className="proof-section" aria-labelledby="proof-title">
+          <div className="section-inner proof-grid">
+            <div>
+              <p className="eyebrow">Why read it</p>
+              <h2 id="proof-title">Less theory. More engineering judgment you can use.</h2>
             </div>
-            <div className="audience-list">
-              {audience.map((item) => (
-                <div className="audience-item" key={item}>
+            <div className="highlight-list">
+              {highlights.map((item) => (
+                <div className="highlight-item" key={item}>
                   <CheckCircle2 size={22} aria-hidden="true" />
-                  <span>{item}</span>
+                  <p>{item}</p>
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="section" aria-labelledby="playbooks-title">
-          <div className="section-inner proof-layout">
-            <div>
-              <p className="eyebrow">Included practice material</p>
-              <h2 id="playbooks-title">Templates, playbooks, and applied case studies.</h2>
-            </div>
-            <div className="playbook-list">
-              {playbooks.map((item) => (
-                <div className="playbook-item" key={item}>
-                  <ClipboardCheck size={21} aria-hidden="true" />
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="section pricing-band" id="pricing" aria-labelledby="pricing-title">
-          <div className="section-inner pricing-layout">
-            <div>
-              <p className="eyebrow">Checkout ready</p>
-              <h2 id="pricing-title">A React landing page prepared for payments.</h2>
-              <p>
-                Set <code>VITE_CHECKOUT_URL</code> in Vercel when the payment provider is ready. The primary
-                call to action will automatically route buyers to that payment page.
-              </p>
-            </div>
-            <div className="purchase-panel">
-              <div className="purchase-heading">
-                <BookOpen size={28} aria-hidden="true" />
-                <div>
-                  <h3>Modern Software Engineering</h3>
-                  <p>First edition ebook</p>
-                </div>
-              </div>
-              <a className="button button-primary purchase-button" href={primaryCta}>
-                {checkoutUrl ? <CreditCard size={19} aria-hidden="true" /> : <Download size={19} aria-hidden="true" />}
-                {primaryLabel}
+              <a className="button button-primary final-cta" href={checkoutUrl} target="_blank" rel="noreferrer">
+                Get it on Amazon
+                <ArrowRight size={18} aria-hidden="true" />
               </a>
-              <p className="purchase-note">
-                {checkoutUrl
-                  ? "Secure checkout opens through the configured payment provider."
-                  : "Temporary inquiry link until the payment provider is connected."}
-              </p>
             </div>
           </div>
         </section>
