@@ -15,9 +15,15 @@ npm run dev
 npm run build
 ```
 
-## Payment integration
+## Purchase link
 
-Set `VITE_CHECKOUT_URL` in Vercel when the payment provider is ready. The primary call to action will route to that URL automatically.
+The landing page defaults to the Amazon ebook URL:
+
+```text
+https://www.amazon.com/dp/B0H6T77MPR
+```
+
+Set `VITE_CHECKOUT_URL` in Vercel only if you want to override the purchase destination later.
 
 ## Vercel
 
