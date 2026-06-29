@@ -12,6 +12,8 @@ import {
 
 const amazonUrl = "https://www.amazon.com/dp/B0H6T77MPR";
 const checkoutUrl = import.meta.env.VITE_CHECKOUT_URL || amazonUrl;
+const freeSampleUrl =
+  "https://mrniueczenuttuvbegzv.supabase.co/storage/v1/object/sign/books/Modern_Software_Engineering_First_Edition_Free_Sample.pdf?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV83NzFkMjY5Ny1jMmRlLTRkMjEtODUyYi0zYzExZDI1MGMyNzUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJib29rcy9Nb2Rlcm5fU29mdHdhcmVfRW5naW5lZXJpbmdfRmlyc3RfRWRpdGlvbl9GcmVlX1NhbXBsZS5wZGYiLCJzY29wZSI6ImRvd25sb2FkIiwiaWF0IjoxNzgyNzU0NDYxLCJleHAiOjQ5MzYzNTQ0NjF9.3WXbysWRLomaMRR6PIt7fYYHpk2rKNVoTmrSE8we8UE";
 
 const highlights = [
   "Architecture, APIs, data, testing, delivery, operations, security, and AI in one practical guide.",
@@ -58,6 +60,10 @@ function App() {
               <a className="button button-secondary" href="#inside">
                 <BookOpen size={20} aria-hidden="true" />
                 See what's inside
+              </a>
+              <a className="button button-secondary" href={freeSampleUrl} target="_blank" rel="noreferrer">
+                <BookOpen size={20} aria-hidden="true" />
+                Download free sample
               </a>
             </div>
 
@@ -120,6 +126,10 @@ function App() {
               <a className="button button-primary final-cta" href={checkoutUrl} target="_blank" rel="noreferrer">
                 Get it on Amazon
                 <ArrowRight size={18} aria-hidden="true" />
+              </a>
+              <a className="button button-secondary final-cta" href={freeSampleUrl} target="_blank" rel="noreferrer">
+                Download free sample
+                <BookOpen size={18} aria-hidden="true" />
               </a>
             </div>
           </div>
