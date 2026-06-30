@@ -36,6 +36,20 @@ const pricingFeatures = [
   "Free sample available before purchase",
 ];
 
+function trackBuyOnAmazonClick(placement) {
+  if (typeof window.gtag !== "function") {
+    return;
+  }
+
+  window.gtag("event", "buy_on_amazon_click", {
+    event_category: "purchase_intent",
+    event_label: placement,
+    link_url: checkoutUrl,
+    currency: "USD",
+    value: 9.99,
+  });
+}
+
 const policies = {
   "/terms-of-service": {
     eyebrow: "Legal",
@@ -137,7 +151,13 @@ function Header() {
       </a>
       <nav className="nav-links" aria-label="Site navigation">
         <a href="/pricing">Pricing</a>
-        <a className="nav-cta" href={checkoutUrl} target="_blank" rel="noreferrer">
+        <a
+          className="nav-cta"
+          href={checkoutUrl}
+          target="_blank"
+          rel="noreferrer"
+          onClick={() => trackBuyOnAmazonClick("header")}
+        >
           Buy on Amazon
         </a>
       </nav>
@@ -177,7 +197,13 @@ function HomePage() {
             </p>
 
             <div className="hero-actions" aria-label="Primary actions">
-              <a className="button button-primary" href={checkoutUrl} target="_blank" rel="noreferrer">
+              <a
+                className="button button-primary"
+                href={checkoutUrl}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => trackBuyOnAmazonClick("home_hero")}
+              >
                 <CreditCard size={20} aria-hidden="true" />
                 Buy the ebook on Amazon
                 <ArrowRight size={18} aria-hidden="true" />
@@ -248,7 +274,13 @@ function HomePage() {
                   <p>{item}</p>
                 </div>
               ))}
-              <a className="button button-primary final-cta" href={checkoutUrl} target="_blank" rel="noreferrer">
+              <a
+                className="button button-primary final-cta"
+                href={checkoutUrl}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => trackBuyOnAmazonClick("home_final_cta")}
+              >
                 Get it on Amazon
                 <ArrowRight size={18} aria-hidden="true" />
               </a>
@@ -281,7 +313,13 @@ function PricingPage() {
               operations, security, and AI-assisted engineering.
             </p>
             <div className="hero-actions" aria-label="Pricing actions">
-              <a className="button button-primary" href={checkoutUrl} target="_blank" rel="noreferrer">
+              <a
+                className="button button-primary"
+                href={checkoutUrl}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => trackBuyOnAmazonClick("pricing_hero")}
+              >
                 <CreditCard size={20} aria-hidden="true" />
                 Buy on Amazon
                 <ArrowRight size={18} aria-hidden="true" />
