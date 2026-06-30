@@ -441,9 +441,55 @@ h2 {
   gap: 10px;
 }
 
+.policy-page {
+  width: min(900px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: clamp(54px, 8vw, 92px) 0 clamp(64px, 9vw, 110px);
+}
+
+.policy-heading {
+  margin-bottom: 34px;
+}
+
+.policy-heading h1 {
+  max-width: 12ch;
+  font-size: clamp(3rem, 7vw, 6rem);
+}
+
+.policy-heading p:last-child {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.policy-content {
+  display: grid;
+  gap: 14px;
+}
+
+.policy-section {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.policy-section h2 {
+  margin-bottom: 12px;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  line-height: 1.15;
+}
+
+.policy-section p {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
 .site-footer {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 16px;
   width: min(1120px, calc(100% - 40px));
   margin: 0 auto;
@@ -453,11 +499,27 @@ h2 {
   font-size: 0.9rem;
 }
 
+.site-footer > div,
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-links {
+  justify-content: flex-end;
+}
+
+.footer-links a:hover {
+  color: var(--text);
+}
+
 @media (max-width: 920px) {
   .site-header,
   .hero,
   .pricing-hero,
   .section-inner,
+  .policy-page,
   .site-footer {
     width: min(100% - 28px, 720px);
   }
@@ -541,5 +603,10 @@ h2 {
 
   .site-footer {
     flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-links {
+    justify-content: flex-start;
   }
 }

@@ -36,6 +36,98 @@ const pricingFeatures = [
   "Free sample available before purchase",
 ];
 
+const policies = {
+  "/terms-of-service": {
+    eyebrow: "Legal",
+    title: "Terms of Service",
+    updated: "Last updated: June 30, 2026",
+    sections: [
+      {
+        title: "Overview",
+        body: "Modern Software Engineering provides a digital ebook for software engineers and technical leaders. By purchasing, downloading, or using the ebook, you agree to these terms.",
+      },
+      {
+        title: "Digital Product",
+        body: "The ebook is delivered as digital content. You may use it for personal or internal professional reference, but you may not resell, redistribute, share publicly, or claim ownership of the content.",
+      },
+      {
+        title: "Payments",
+        body: "Payments may be processed by Paddle or another authorized merchant of record. The checkout provider may collect billing details, tax information, and payment information needed to complete your purchase.",
+      },
+      {
+        title: "Intellectual Property",
+        body: "All ebook content, branding, design, and related materials remain the property of Modern Software Engineering or its rights holders. No rights are transferred except the limited right to access and read the purchased ebook.",
+      },
+      {
+        title: "No Professional Warranty",
+        body: "The ebook is provided for educational and informational purposes. It does not guarantee any technical, business, employment, security, legal, or financial outcome.",
+      },
+      {
+        title: "Contact",
+        body: "For support or questions about these terms, contact support@modernsoftwareengineering.com.",
+      },
+    ],
+  },
+  "/privacy-policy": {
+    eyebrow: "Legal",
+    title: "Privacy Policy",
+    updated: "Last updated: June 30, 2026",
+    sections: [
+      {
+        title: "Information We Collect",
+        body: "We may collect information you provide directly, such as your name, email address, support messages, and purchase-related details. Payment information is handled by the checkout provider and is not stored by this website.",
+      },
+      {
+        title: "Payment Processing",
+        body: "When Paddle is used for checkout, Paddle may process your billing information, payment method, tax details, and transaction records as merchant of record. Their privacy terms apply to that payment flow.",
+      },
+      {
+        title: "How We Use Information",
+        body: "We use information to deliver the ebook, respond to support requests, manage purchases, prevent fraud, comply with legal obligations, and improve the website and product experience.",
+      },
+      {
+        title: "Sharing",
+        body: "We do not sell personal information. We may share necessary information with service providers such as payment processors, hosting providers, analytics tools, and legal or compliance services.",
+      },
+      {
+        title: "Data Rights",
+        body: "Depending on your location, you may have rights to access, correct, delete, or restrict use of your personal information. Contact support@modernsoftwareengineering.com for privacy requests.",
+      },
+      {
+        title: "Security",
+        body: "We use reasonable safeguards to protect information, but no online system is completely secure. Keep your purchase emails and download links private.",
+      },
+    ],
+  },
+  "/refund-policy": {
+    eyebrow: "Purchases",
+    title: "Refund Policy",
+    updated: "Last updated: June 30, 2026",
+    sections: [
+      {
+        title: "Digital Ebook Sales",
+        body: "Modern Software Engineering is sold as a digital ebook. Because digital content can be accessed immediately, purchases are generally final once the ebook has been delivered or downloaded.",
+      },
+      {
+        title: "Eligible Refunds",
+        body: "Refunds may be considered for duplicate purchases, accidental purchases reported promptly, technical delivery problems that cannot be resolved, or charges that appear fraudulent or unauthorized.",
+      },
+      {
+        title: "How to Request a Refund",
+        body: "Send your order email, purchase date, and reason for the request to support@modernsoftwareengineering.com. If Paddle processed your payment, the refund may be handled through Paddle's buyer support flow.",
+      },
+      {
+        title: "Timing",
+        body: "Approved refunds are returned to the original payment method. Processing times depend on the payment provider, card network, bank, and Paddle where applicable.",
+      },
+      {
+        title: "Free Sample",
+        body: "A free sample is available so you can review the style and scope of the ebook before purchasing.",
+      },
+    ],
+  },
+};
+
 function Header() {
   return (
     <header className="site-header" aria-label="Primary navigation">
@@ -56,8 +148,15 @@ function Header() {
 function Footer() {
   return (
     <footer className="site-footer">
-      <span>Modern Software Engineering</span>
-      <span>First edition ebook, 2026</span>
+      <div>
+        <span>Modern Software Engineering</span>
+        <span>First edition ebook, 2026</span>
+      </div>
+      <nav className="footer-links" aria-label="Legal links">
+        <a href="/terms-of-service">Terms of Service</a>
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/refund-policy">Refund Policy</a>
+      </nav>
     </footer>
   );
 }
@@ -221,10 +320,44 @@ function PricingPage() {
   );
 }
 
-function App() {
-  const isPricingPage = window.location.pathname === "/pricing";
+function PolicyPage({ policy }) {
+  return (
+    <>
+      <Header />
 
-  return isPricingPage ? <PricingPage /> : <HomePage />;
+      <main id="top">
+        <section className="policy-page" aria-labelledby="policy-title">
+          <div className="policy-heading">
+            <p className="eyebrow">{policy.eyebrow}</p>
+            <h1 id="policy-title">{policy.title}</h1>
+            <p>{policy.updated}</p>
+          </div>
+
+          <div className="policy-content">
+            {policy.sections.map((section) => (
+              <section className="policy-section" key={section.title}>
+                <h2>{section.title}</h2>
+                <p>{section.body}</p>
+              </section>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </>
+  );
+}
+
+function App() {
+  const { pathname } = window.location;
+  const policy = policies[pathname];
+
+  if (policy) {
+    return <PolicyPage policy={policy} />;
+  }
+
+  return pathname === "/pricing" ? <PricingPage /> : <HomePage />;
 }
 
 export default App;
