@@ -6,6 +6,7 @@ import {
   Code2,
   CreditCard,
   GitBranch,
+  Receipt,
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
@@ -28,18 +29,43 @@ const topics = [
   { icon: Sparkles, label: "AI-assisted engineering" },
 ];
 
-function App() {
+const pricingFeatures = [
+  "Complete first edition ebook",
+  "56 chapters across 11 practical parts",
+  "Templates, checklists, reviews, and runbooks",
+  "Free sample available before purchase",
+];
+
+function Header() {
   return (
-    <>
-      <header className="site-header" aria-label="Primary navigation">
-        <a className="brand" href="#top" aria-label="Modern Software Engineering home">
-          <span className="brand-mark">MSE</span>
-          <span>Modern Software Engineering</span>
-        </a>
+    <header className="site-header" aria-label="Primary navigation">
+      <a className="brand" href="/" aria-label="Modern Software Engineering home">
+        <span className="brand-mark">MSE</span>
+        <span>Modern Software Engineering</span>
+      </a>
+      <nav className="nav-links" aria-label="Site navigation">
+        <a href="/pricing">Pricing</a>
         <a className="nav-cta" href={checkoutUrl} target="_blank" rel="noreferrer">
           Buy on Amazon
         </a>
-      </header>
+      </nav>
+    </header>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="site-footer">
+      <span>Modern Software Engineering</span>
+      <span>First edition ebook, 2026</span>
+    </footer>
+  );
+}
+
+function HomePage() {
+  return (
+    <>
+      <Header />
 
       <main id="top">
         <section className="hero" aria-labelledby="hero-title">
@@ -136,12 +162,69 @@ function App() {
         </section>
       </main>
 
-      <footer className="site-footer">
-        <span>Modern Software Engineering</span>
-        <span>First edition ebook, 2026</span>
-      </footer>
+      <Footer />
     </>
   );
+}
+
+function PricingPage() {
+  return (
+    <>
+      <Header />
+
+      <main id="top">
+        <section className="pricing-hero" aria-labelledby="pricing-title">
+          <div className="pricing-copy">
+            <p className="eyebrow">Simple pricing</p>
+            <h1 id="pricing-title">Get the ebook for $9.99.</h1>
+            <p className="hero-lede">
+              One practical software engineering guide for architecture, delivery, testing,
+              operations, security, and AI-assisted engineering.
+            </p>
+            <div className="hero-actions" aria-label="Pricing actions">
+              <a className="button button-primary" href={checkoutUrl} target="_blank" rel="noreferrer">
+                <CreditCard size={20} aria-hidden="true" />
+                Buy on Amazon
+                <ArrowRight size={18} aria-hidden="true" />
+              </a>
+              <a className="button button-secondary" href={freeSampleUrl} target="_blank" rel="noreferrer">
+                <BookOpen size={20} aria-hidden="true" />
+                Download free sample
+              </a>
+            </div>
+          </div>
+
+          <article className="price-card" aria-label="Ebook pricing card">
+            <div className="price-card-header">
+              <Receipt size={24} aria-hidden="true" />
+              <span>First edition ebook</span>
+            </div>
+            <div className="price-value">
+              <span className="currency">$</span>
+              <span>9.99</span>
+            </div>
+            <p className="price-note">One-time ebook purchase through Amazon.</p>
+            <div className="price-features">
+              {pricingFeatures.map((feature) => (
+                <div className="highlight-item" key={feature}>
+                  <CheckCircle2 size={22} aria-hidden="true" />
+                  <p>{feature}</p>
+                </div>
+              ))}
+            </div>
+          </article>
+        </section>
+      </main>
+
+      <Footer />
+    </>
+  );
+}
+
+function App() {
+  const isPricingPage = window.location.pathname === "/pricing";
+
+  return isPricingPage ? <PricingPage /> : <HomePage />;
 }
 
 export default App;

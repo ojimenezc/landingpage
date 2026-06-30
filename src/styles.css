@@ -75,7 +75,8 @@ a {
 .button,
 .quick-stats,
 .topic-pill,
-.highlight-item {
+.highlight-item,
+.price-card {
   border-radius: 8px;
 }
 
@@ -110,6 +111,19 @@ a {
 
 .nav-cta:hover {
   background: rgba(255, 248, 232, 0.18);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 850;
+}
+
+.nav-links a:not(.nav-cta):hover {
+  color: var(--text);
 }
 
 .hero {
@@ -353,6 +367,80 @@ h2 {
   margin-top: 8px;
 }
 
+.pricing-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.58fr);
+  align-items: center;
+  gap: clamp(32px, 7vw, 84px);
+  width: min(1120px, calc(100% - 40px));
+  min-height: calc(100vh - 78px);
+  margin: 0 auto;
+  padding: 36px 0 76px;
+}
+
+.pricing-copy h1 {
+  max-width: 12ch;
+  font-size: clamp(3.6rem, 8vw, 7.2rem);
+}
+
+.price-card {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(24px, 4vw, 34px);
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(145deg, rgba(31, 191, 159, 0.17), transparent 48%),
+    rgba(255, 248, 232, 0.09);
+  box-shadow: var(--shadow);
+}
+
+.price-card::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  border-top: 4px solid var(--gold);
+  pointer-events: none;
+}
+
+.price-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--gold);
+  font-size: 0.86rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.price-value {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 26px 0 6px;
+  color: var(--text);
+  font-size: clamp(4.4rem, 8vw, 6.5rem);
+  font-weight: 950;
+  line-height: 0.9;
+}
+
+.currency {
+  margin-top: 0.12em;
+  color: var(--gold);
+  font-size: 0.4em;
+}
+
+.price-note {
+  margin-bottom: 22px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.price-features {
+  display: grid;
+  gap: 10px;
+}
+
 .site-footer {
   display: flex;
   justify-content: space-between;
@@ -368,6 +456,7 @@ h2 {
 @media (max-width: 920px) {
   .site-header,
   .hero,
+  .pricing-hero,
   .section-inner,
   .site-footer {
     width: min(100% - 28px, 720px);
@@ -381,6 +470,7 @@ h2 {
   }
 
   .hero,
+  .pricing-hero,
   .section-heading,
   .proof-grid {
     grid-template-columns: 1fr;
@@ -389,6 +479,11 @@ h2 {
   .hero {
     min-height: auto;
     padding-top: 24px;
+  }
+
+  .pricing-hero {
+    min-height: auto;
+    padding-top: 42px;
   }
 
   .cover-panel {
@@ -416,8 +511,16 @@ h2 {
     display: none;
   }
 
+  .nav-links {
+    gap: 10px;
+  }
+
   h1 {
     font-size: clamp(3.4rem, 17vw, 5.2rem);
+  }
+
+  .pricing-copy h1 {
+    font-size: clamp(3.1rem, 15vw, 4.8rem);
   }
 
   .hero-actions {
